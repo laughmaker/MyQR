@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MKNetworkKit.h"
+#import "HomeVC.h"
+#import "MLNavigationController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UIWindow                  *window;
+@property (strong, nonatomic) MKNetworkEngine           *networkEngine;
+@property (strong, nonatomic) HomeVC                    *homeVC;
+@property (strong, nonatomic) MLNavigationController    *rootNC;
 
 @end

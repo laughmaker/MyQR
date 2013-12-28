@@ -7,15 +7,36 @@
 //
 
 #import "AppDelegate.h"
+#import "UIImage+Addition.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    self.homeVC = [[HomeVC alloc] init];
+    self.rootNC = [[MLNavigationController alloc] initWithRootViewController:self.homeVC];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = [UIColor blackColor];
+    self.window.rootViewController = self.rootNC;
+    self.window.radius = 3;
+    self.window.clipsToBounds = YES;
     [self.window makeKeyAndVisible];
+    
+    NSDictionary *dict = @{NSFontAttributeName: kTitleFontMiddle};
+    [[UINavigationBar appearance] setTitleTextAttributes:dict];
+    
+    UIImage *image = [UIImage imageWithColor:[kAppBgColor colorWithAlphaComponent:0.95] frame:CGRectMake(0, 0, 320, 64)];
+    [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+    [UINavigationBar appearance].tintColor = kBlackColor;
+    
+    UIImage *shadowImage = [UIImage imageWithColor:[kGrayColor colorWithAlphaComponent:0.15] frame:CGRectMake(0, 0, 320, 1)];
+    [[UINavigationBar appearance] setShadowImage:shadowImage];
+
+    //初始化网络引擎
+    self.networkEngine = [[MKNetworkEngine alloc] initWithHostName:kHostSite];
+    [self.networkEngine useCache];
+
     return YES;
 }
 
